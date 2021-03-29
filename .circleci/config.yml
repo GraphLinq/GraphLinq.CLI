@@ -7,6 +7,7 @@ jobs:
       - image: mcr.microsoft.com/dotnet/sdk:3.1
     steps:
       - checkout
+      - setup_remote_docker
       - run:
           name: Clone GraphLinq.Engine
           command: git clone https://github.com/GraphLinq/GraphLinq.Engine.git ../GraphLinq.Engine
@@ -20,6 +21,19 @@ jobs:
           name: Build
           command: dotnet build -c Release
       - run:
+          name: Install docker
+          command: |
+            apt-get update && apt-get install -y lsb-release && apt-get clean all
+            apt-get -y install apt-transport-https ca-certificates curl gnupg lsb-release
+            curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+            echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu bionic stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+            apt-get install software-properties-common -y
+            apt-get update -y
+            add-apt-repository "deb http://ftp.de.debian.org/debian sid main"
+            apt-get update -y
+            apt-get install libseccomp2
+            apt-get -y install docker-ce docker-ce-cli containerd.io
+      - run:
           name: Build docker
           command: |
             	rm -rf docker_build
@@ -28,7 +42,12 @@ jobs:
               mkdir docker_build/plugins
               cp -a bin/Release/netcoreapp3.1/. docker_build/
               docker build -t graphlinqcli .
-        
+      - run:
+          name: Push Docker Hub
+          command: |
+            docker login --username=$DOCKERHUB_USERNAME --email=$DOCKERHUB_EMAIL -p $DOCKERHUB_PASSWORD
+            docker tag graphlinqcli:latest graphlinq/graphlinq-engine:ci
+            docker push graphlinq/graphlinq-engine:ci
 workflows:
   version: 2
   build-master:

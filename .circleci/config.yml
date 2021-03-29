@@ -7,6 +7,7 @@ jobs:
       - image: mcr.microsoft.com/dotnet/sdk:3.1
     steps:
       - checkout
+      - setup_remote_docker
       - run:
           name: Clone GraphLinq.Engine
           command: git clone https://github.com/GraphLinq/GraphLinq.Engine.git ../GraphLinq.Engine
@@ -22,10 +23,15 @@ jobs:
       - run:
           name: Install docker
           command: |
+            apt-get update && apt-get install -y lsb-release && apt-get clean all
             apt-get -y install apt-transport-https ca-certificates curl gnupg lsb-release
-            curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-            echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-            apt-get update
+            curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+            echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu bionic stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+            apt-get install software-properties-common -y
+            apt-get update -y
+            add-apt-repository "deb http://ftp.de.debian.org/debian sid main"
+            apt-get update -y
+            apt-get install libseccomp2
             apt-get -y install docker-ce docker-ce-cli containerd.io
       - run:
           name: Build docker

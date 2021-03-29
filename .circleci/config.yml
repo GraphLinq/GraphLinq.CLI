@@ -9,7 +9,7 @@ jobs:
       - checkout
       - run:
           name: Install Make
-          command: sudo apt-get install build-essential
+          command: apt-get install build-essential
       - run:
           name: Clone GraphLinq.Engine
           command: git clone https://github.com/GraphLinq/GraphLinq.Engine.git ../GraphLinq.Engine

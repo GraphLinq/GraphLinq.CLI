@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\NodeBlock.Engine.Encoding\NodeBlock.Engine.Encoding.csproj" />
-    <ProjectReference Include="..\NodeBlock.Engine\NodeBlock.Engine.csproj" />
+    <ProjectReference Include="..\GraphLinq.Encoding\NodeBlock.Engine.Encoding.csproj" />
+    <ProjectReference Include="..\GraphLinq.Engine\NodeBlock.Engine.csproj" />
   </ItemGroup>
 
   <ItemGroup>

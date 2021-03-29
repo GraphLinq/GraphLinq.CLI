@@ -45,7 +45,7 @@ jobs:
       - run:
           name: Push Docker Hub
           command: |
-            docker login --username=$DOCKERHUB_USERNAME --email=$DOCKERHUB_EMAIL -p $DOCKERHUB_PASSWORD
+            docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
             docker tag graphlinqcli:latest graphlinq/graphlinq-engine:ci
             docker push graphlinq/graphlinq-engine:ci
 workflows:

@@ -8,9 +8,6 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install Make
-          command: sudo apt-get install build-essential
-      - run:
           name: Clone GraphLinq.Engine
           command: git clone https://github.com/GraphLinq/GraphLinq.Engine.git ../GraphLinq.Engine
       - run:
@@ -23,8 +20,15 @@ jobs:
           name: Build
           command: dotnet build -c Release
       - run:
-          name: Make Docker
-          command: make docker
+          name: Build docker
+          command: |
+            	rm -rf docker_build
+              mkdir docker_build
+              echo "Create plugin directory"
+              mkdir docker_build/plugins
+              cp -a bin/Release/netcoreapp3.1/. docker_build/
+              docker build -t graphlinqcli .
+        
 workflows:
   version: 2
   build-master:

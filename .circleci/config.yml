@@ -19,6 +19,9 @@ jobs:
       - run:
           name: Build
           command: dotnet build -c Release
+      - run:
+          name: Make Docker
+          command: make docker
 workflows:
   version: 2
   build-master:

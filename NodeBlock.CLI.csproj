@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MoonSharp" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\GraphLinq.Encoding\NodeBlock.Engine.Encoding.csproj" />
     <ProjectReference Include="..\GraphLinq.Engine\NodeBlock.Engine.csproj" />
   </ItemGroup>

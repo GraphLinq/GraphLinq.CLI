@@ -23,7 +23,7 @@ namespace NodeBlock.CLI
             try
             {
                 // init graphs cost database updater
-                GraphsContainer.InitConsumingGraphCosts();
+                //GraphsContainer.InitConsumingGraphCosts();
 
                 // init graphs that was live on last run
                 if(Environment.GetEnvironmentVariable("relaunch_last_graph") == "true")

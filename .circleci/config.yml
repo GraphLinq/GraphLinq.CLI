@@ -32,6 +32,7 @@ jobs:
             add-apt-repository "deb http://ftp.de.debian.org/debian sid main"
             apt-get update -y
             apt-get install libseccomp2
+            apt-get -y install libssl1.0.0 libssl-dev
             apt-get -y install docker-ce docker-ce-cli containerd.io
       - run:
           name: Build docker

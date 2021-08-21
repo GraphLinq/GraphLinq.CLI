@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   build:
     environment:
-      BUILD_VERSION: 1.0.21
+      BUILD_VERSION: 1.0.22
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:3.1
     steps:
@@ -32,7 +32,7 @@ jobs:
             add-apt-repository "deb http://ftp.de.debian.org/debian sid main"
             apt-get update -y
             apt-get install libseccomp2
-            apt-get -y install libssl1.0.0 libssl-dev
+            apt-get -y install libssl1.1 libssl-dev
             apt-get -y install docker-ce docker-ce-cli containerd.io
       - run:
           name: Build docker

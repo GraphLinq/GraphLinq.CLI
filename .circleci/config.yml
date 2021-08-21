@@ -9,6 +9,9 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
+          name: Install Git
+          command: apk add git
+     -run:
           name: Clone GraphLinq.Engine
           command: git clone https://github.com/GraphLinq/GraphLinq.Engine.git ../GraphLinq.Engine
       - run:

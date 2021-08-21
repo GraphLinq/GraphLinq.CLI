@@ -11,7 +11,7 @@ jobs:
       - run:
           name: Install Git
           command: apk add git
-     - run:
+      - run:
           name: Clone GraphLinq.Engine
           command: git clone https://github.com/GraphLinq/GraphLinq.Engine.git ../GraphLinq.Engine
       - run:

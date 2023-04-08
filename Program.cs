@@ -31,7 +31,7 @@ namespace NodeBlock.CLI
                 o.Dsn = Environment.GetEnvironmentVariable("sentry_dsn").ToString();
 
                 // When debug is enabled, the Sentry client will emit detailed debugging information to the console.
-                o.Debug = false;
+                o.Debug = Convert.ToBoolean(Environment.GetEnvironmentVariable("sentry_debug"));
             });
 
             
